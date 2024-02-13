@@ -1,8 +1,8 @@
 import { Month } from "../types/Month";
+import { generatePeriods } from "../utils/generatePeriods";
 
 export const getClientsRetention = async (referenceMonth: Month) => {
-  // TODO: implement this function
+  const retentionReport = generatePeriods(referenceMonth);
 
-  console.log(referenceMonth);
-  return [];
+  return retentionReport;
 };
