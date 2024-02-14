@@ -15,6 +15,7 @@ export type ReferenceMonthQueryResult = {
  * Keep the list of clients for each employee for later queries
  */
 export type ReferenceMonthByEmployee = {
+  employeeId: number;
   employeeName: string;
   clients: number[];
   clientsRetention?: number;
@@ -24,6 +25,7 @@ export type ReferenceMonthByEmployee = {
  * Shape of the final report for one employee
  */
 export type RetentionByEmployee = {
+  employeeId: number;
   employeeName: string;
   initialNumberOfClients: number;
   clientsRetention: number;
