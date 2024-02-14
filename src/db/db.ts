@@ -1,6 +1,8 @@
 import { Database } from "sqlite3";
 
-export const db = new Database("data.sqlite", (err) => {
+const DATABASE_FILE = process.env.DATABASE_FILE || "data.sqlite";
+
+export const db = new Database(DATABASE_FILE, (err) => {
   if (err) {
     console.error(err.message);
     // Exit with error

@@ -2,6 +2,11 @@ import cors from "cors";
 import express from "express";
 import { mainRouter } from "./mainRouter";
 import { errorHandler } from "./handlers/errors";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const APP_PORT = process.env.APP_PORT || 3000;
 
 const app = express();
 
@@ -14,8 +19,8 @@ app.use("/api", mainRouter);
 app.use(errorHandler);
 
 app
-  .listen(3000, () => {
-    console.log("Server is running on port 3000");
+  .listen(APP_PORT, () => {
+    console.log(`Server is running on port ${APP_PORT}`);
   })
   .on("error", (err) => {
     console.error("Error starting server:", err.message);
