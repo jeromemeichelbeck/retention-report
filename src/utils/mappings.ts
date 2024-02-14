@@ -6,14 +6,11 @@ import {
 
 export const mapRetentionFirstPeriodQuery = (
   row: ReferenceMonthQueryResult
-): ReferenceMonthByEmployee => {
-  const clients = row.clients.split(",").map(Number);
-  return {
-    employeeId: row.employee_id,
-    employeeName: row.employee_name,
-    clients,
-  };
-};
+): ReferenceMonthByEmployee => ({
+  employeeId: row.employee_id,
+  employeeName: row.employee_name,
+  clients: row.clients.split(",").map(Number),
+});
 
 export const mapRetentionForEmployees = ({
   clients,
