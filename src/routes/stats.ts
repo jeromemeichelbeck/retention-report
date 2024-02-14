@@ -1,3 +1,7 @@
+/**
+ * Stats routes
+ */
+
 import { Router } from "express";
 import { getClientsRetentionHandler } from "../handlers/stats";
 

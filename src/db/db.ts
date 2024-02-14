@@ -2,6 +2,9 @@ import { Database } from "sqlite3";
 
 const DATABASE_FILE = process.env.DATABASE_FILE || "data.sqlite";
 
+/**
+ * Create a new SQLite database connection
+ */
 export const db = new Database(DATABASE_FILE, (err) => {
   if (err) {
     console.error(err.message);

@@ -7,6 +7,9 @@ import {
 import { mapRetentionFirstPeriodQuery } from "../utils/mappings";
 import { prepareIn } from "../utils/queries";
 
+/**
+ * Compute the retention report for the first period (reference month)
+ */
 export const getReferenceReport = async (referenceMonth: Month) => {
   const statement = db.prepare(/* sql */ `
     SELECT
@@ -39,6 +42,7 @@ export const getReferenceReport = async (referenceMonth: Month) => {
             reject(new Error("Error while fetching appointments"));
           }
 
+          // Map the raw query result to the expected format
           const referenceReport = rows.map(mapRetentionFirstPeriodQuery);
 
           resolve(referenceReport);
@@ -49,6 +53,9 @@ export const getReferenceReport = async (referenceMonth: Month) => {
   return referenceReport;
 };
 
+/**
+ * Compute the retention report a given period and a given list of client id's
+ */
 export const getClientsRetentionByMonth = async (
   clients: number[],
   month: Month

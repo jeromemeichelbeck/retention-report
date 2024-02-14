@@ -1,3 +1,7 @@
+/**
+ * Main router for the application
+ */
+
 import { Router } from "express";
 import { statsRouter } from "./routes/stats";
 

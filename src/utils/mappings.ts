@@ -14,7 +14,7 @@ export const mapRetentionFirstPeriodQuery = (
   };
 };
 
-export const mapRetentionFirstPeriodEmployees = ({
+export const mapRetentionForEmployees = ({
   clients,
   clientsRetention,
   ...report
