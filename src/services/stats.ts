@@ -1,6 +1,5 @@
-import { getReferenceReport } from "../managers/stats/getReferenceReport";
+import { getReferenceReport } from "../managers/stats";
 import { Month } from "../types/Month";
-import { RetentionByEmployee } from "../types/RetentionReport";
 import { generatePeriods, getThisMonth, isPeriodInvalid } from "../utils/dates";
 import { mapRetentionFirstPeriodEmployees } from "../utils/mappings";
 

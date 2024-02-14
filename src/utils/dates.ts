@@ -9,22 +9,26 @@ export const isPeriodInvalid = (month: Month, monthToCompare: Month) =>
   dateFns.isAfter(month, monthToCompare);
 
 export const generatePeriods = (from: Month, to: Month) => {
-  let month = from;
-  const thisMonth = to;
+  let currentMonth = from;
+
   const periods = [
     {
-      month,
+      month: currentMonth,
       employees: {},
     },
   ];
 
   do {
-    month = dateFns.format(dateFns.addMonths(month, 1), "yyyy-MM") as Month;
+    currentMonth = dateFns.format(
+      dateFns.addMonths(currentMonth, 1),
+      "yyyy-MM"
+    ) as Month;
+
     periods.push({
-      month,
+      month: currentMonth,
       employees: {},
     });
-  } while (dateFns.isAfter(thisMonth, month));
+  } while (dateFns.isAfter(to, currentMonth));
 
   return periods;
 };
