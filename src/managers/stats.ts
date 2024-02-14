@@ -59,12 +59,12 @@ export const getClientsRetentionByMonth = async (
     FROM
       APPOINTMENTS
     WHERE
-      client_id IN (${clients.join(",")})
+      client_id IN (${prepareIn(clients)})
       AND date LIKE ?
   `);
 
   const retention = new Promise<number>((resolve, reject) => {
-    statement.bind(`${month}%`).all((err, rows) => {
+    statement.bind(...clients, `${month}%`).all((err, rows) => {
       if (err) {
         reject(new Error("Error while fetching appointments"));
       }
