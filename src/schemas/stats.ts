@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { isMonth } from "../utils/type-predicates";
-import { Month } from "../types/Month";
+
+export const validMonthRegex = new RegExp(/^\d{4}-(0[1-9]|1[0-2])$/);
 
 export const clientsRetentionRequestSchema = z.object({
   query: z.object({
@@ -9,9 +9,17 @@ export const clientsRetentionRequestSchema = z.object({
         required_error: "'referenceMonth' is required",
       })
       .regex(
-        new RegExp(/^\d{4}-(0[1-9]|1[0-2])$/),
+        validMonthRegex,
         "'referenceMonth' must be a valid month in the format 'YYYY-MM'"
       )
       .brand<"Month">(),
+    lastMonth: z
+      .string()
+      .regex(
+        validMonthRegex,
+        "'lastMonth' must be a valid month in the format 'YYYY-MM'"
+      )
+      .brand<"Month">()
+      .optional(),
   }),
 });

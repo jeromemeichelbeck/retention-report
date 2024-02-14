@@ -10,7 +10,8 @@ export const getClientsRetentionHandler = async (
 ) => {
   try {
     const { query } = clientsRetentionRequestSchema.parse(req);
-    const result = await getClientsRetention(query.referenceMonth);
+    const { referenceMonth, lastMonth } = query;
+    const result = await getClientsRetention(referenceMonth, lastMonth);
 
     res.status(200).json(result);
   } catch (error) {
