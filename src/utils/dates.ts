@@ -1,5 +1,6 @@
 import * as dateFns from "date-fns";
 import { Month } from "../types/Month";
+import { RetentionReportByMonth } from "../types/RetentionReport";
 
 export const getThisMonth = () =>
   dateFns.format(new Date(), "yyyy-MM") as Month;
@@ -30,5 +31,5 @@ export const generatePeriods = (from: Month, to: Month) => {
     });
   } while (dateFns.isAfter(to, currentMonth));
 
-  return periods;
+  return periods as RetentionReportByMonth[];
 };

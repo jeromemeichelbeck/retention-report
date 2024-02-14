@@ -5,6 +5,7 @@ import {
   ReferenceMonthByEmployee,
 } from "../types/RetentionReport";
 import { mapRetentionFirstPeriodQuery } from "../utils/mappings";
+import { prepareIn } from "../utils/queries";
 
 export const getReferenceReport = async (referenceMonth: Month) => {
   const statement = db.prepare(/* sql */ `

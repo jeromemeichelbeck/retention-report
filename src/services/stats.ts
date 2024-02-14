@@ -24,11 +24,6 @@ export const getClientsRetention = async (
 
   const referenceReport = await getReferenceReport(firstPeriod.month);
 
-  // retentionReport[0] = {
-  //   ...firstPeriod,
-  //   employees: referenceReport.map(mapRetentionFirstPeriodEmployees),
-  // };
-
   return Promise.all(
     retentionReport.map(async (period, index) => {
       if (index === 0) {

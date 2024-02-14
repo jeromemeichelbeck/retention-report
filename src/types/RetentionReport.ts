@@ -7,8 +7,8 @@ export type RetentionByEmployee = {
 };
 
 export type RetentionReportByMonth = {
-  month: string;
-  employees: Record<number, RetentionByEmployee>;
+  month: Month;
+  employees: Array<RetentionByEmployee>;
 };
 
 export type ReferenceMonthQueryResult = {
