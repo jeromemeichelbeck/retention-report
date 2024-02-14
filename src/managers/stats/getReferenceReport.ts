@@ -1,6 +1,9 @@
 import { db } from "../../db/db";
 import { Month } from "../../types/Month";
-import { ReferenceMonthQueryResult } from "../../types/RetentionReport";
+import {
+  ReferenceMonthQueryResult,
+  ReferenceMonthByEmployee,
+} from "../../types/RetentionReport";
 
 const REFERENCE_REPORT_QUERY = /* sql */ `
   SELECT
@@ -27,25 +30,27 @@ const REFERENCE_REPORT_QUERY = /* sql */ `
 export const getReferenceReport = async (referenceMonth: Month) => {
   const statement = db.prepare(REFERENCE_REPORT_QUERY);
 
-  const referenceReport = new Promise((resolve, reject) => {
-    statement
-      .bind(`${referenceMonth}%`)
-      .all<ReferenceMonthQueryResult>((err, rows) => {
-        if (err) {
-          reject(new Error("Error while fetching appointments"));
-        }
+  const referenceReport = new Promise<ReferenceMonthByEmployee[]>(
+    (resolve, reject) => {
+      statement
+        .bind(`${referenceMonth}%`)
+        .all<ReferenceMonthQueryResult>((err, rows) => {
+          if (err) {
+            reject(new Error("Error while fetching appointments"));
+          }
 
-        const referenceReport = rows.map((row) => ({
-          employee: {
-            id: row.employee_id,
-            name: row.employee_name,
-          },
-          clients: row.clients.split(",").map(Number),
-        }));
+          const referenceReport = rows.map((row) => ({
+            employee: {
+              id: row.employee_id,
+              name: row.employee_name,
+            },
+            clients: row.clients.split(",").map(Number),
+          }));
 
-        resolve(referenceReport);
-      });
-  });
+          resolve(referenceReport);
+        });
+    }
+  );
 
   return referenceReport;
 };

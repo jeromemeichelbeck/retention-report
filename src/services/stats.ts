@@ -1,6 +1,8 @@
 import { getReferenceReport } from "../managers/stats/getReferenceReport";
 import { Month } from "../types/Month";
+import { RetentionByEmployee } from "../types/RetentionReport";
 import { generatePeriods, getThisMonth, isPeriodInvalid } from "../utils/dates";
+import { mapRetentionFirstPeriodEmployees } from "../utils/mappings";
 
 export const getClientsRetention = async (
   referenceMonth: Month,
@@ -12,7 +14,7 @@ export const getClientsRetention = async (
 
   const retentionReport = generatePeriods(referenceMonth, lastMonth);
 
-  const firstPeriod = retentionReport[0];
+  const firstPeriod = retentionReport.at(0);
 
   if (!firstPeriod) {
     return retentionReport;
@@ -20,7 +22,10 @@ export const getClientsRetention = async (
 
   const referenceReport = await getReferenceReport(firstPeriod.month);
 
-  console.log(referenceReport);
+  retentionReport[0] = {
+    ...firstPeriod,
+    employees: referenceReport.map(mapRetentionFirstPeriodEmployees),
+  };
 
   return retentionReport;
 };
