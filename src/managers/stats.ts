@@ -47,3 +47,31 @@ export const getReferenceReport = async (referenceMonth: Month) => {
 
   return referenceReport;
 };
+
+export const getClientsRetentionByMonth = async (
+  clients: number[],
+  month: Month
+) => {
+  const statement = db.prepare(/* sql */ `
+    SELECT
+      client_id,
+      date
+    FROM
+      APPOINTMENTS
+    WHERE
+      client_id IN (${clients.join(",")})
+      AND date LIKE ?
+  `);
+
+  const retention = new Promise<number>((resolve, reject) => {
+    statement.bind(`${month}%`).all((err, rows) => {
+      if (err) {
+        reject(new Error("Error while fetching appointments"));
+      }
+
+      resolve(rows.length);
+    });
+  });
+
+  return retention;
+};

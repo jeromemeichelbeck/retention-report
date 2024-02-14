@@ -1,14 +1,9 @@
 import { Month } from "./Month";
 
-export type Employee = {
-  id: number;
-  name: string;
-};
-
 export type RetentionByEmployee = {
-  employee: Employee;
-  nbrClients: number;
-  retentionRate: number;
+  employeeName: string;
+  initialNumberOfClients: number;
+  clientsRetention: number;
 };
 
 export type RetentionReportByMonth = {
@@ -24,6 +19,7 @@ export type ReferenceMonthQueryResult = {
 };
 
 export type ReferenceMonthByEmployee = {
-  employee: Employee;
+  employeeName: string;
   clients: number[];
+  clientsRetention?: number;
 };
