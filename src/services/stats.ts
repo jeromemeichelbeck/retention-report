@@ -6,8 +6,6 @@ export const getClientsRetention = async (
   referenceMonth: Month,
   lastMonth = getThisMonth()
 ) => {
-  lastMonth = lastMonth ?? getThisMonth();
-
   if (isPeriodInvalid(referenceMonth, lastMonth)) {
     throw new Error(`'referenceMonth' must be before '${lastMonth}'`);
   }
