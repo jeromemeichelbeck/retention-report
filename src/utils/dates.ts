@@ -9,8 +9,8 @@ export const isPeriodInvalid = (month: Month, monthToCompare: Month) =>
   dateFns.isAfter(month, monthToCompare);
 
 export const generatePeriods = (from: Month, to: Month) => {
-  let month = from.toString();
-  const thisMonth = to.toString();
+  let month = from;
+  const thisMonth = to;
   const periods = [
     {
       month,
@@ -19,7 +19,7 @@ export const generatePeriods = (from: Month, to: Month) => {
   ];
 
   do {
-    month = dateFns.format(dateFns.addMonths(month, 1), "yyyy-MM");
+    month = dateFns.format(dateFns.addMonths(month, 1), "yyyy-MM") as Month;
     periods.push({
       month,
       employees: {},
