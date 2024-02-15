@@ -95,5 +95,5 @@ To Improve performance, we should create an index on the APPOINTMENT.date field:
 
 ```
 CREATE INDEX appointment_date 
-ON APPOINTMENT(date);
+ON APPOINTMENTS(date);
 ```
