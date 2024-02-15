@@ -9,6 +9,7 @@ A simple api to demonstrate how we could get a retention report given an appoint
 - [Installation](#installation)
 - [Usage](#usage)
 - [Tests](#tests)
+- [Performences](#performences)
 
 ## Installation
 
@@ -87,3 +88,12 @@ Shape of the response:
 npm run test
 ```
 Only utils are unit tested for now
+
+## Performences
+
+To Improve performance, we should create an index on the APPOINTMENT.date field:
+
+```
+CREATE INDEX appointment_date 
+ON APPOINTMENT(date);
+```
